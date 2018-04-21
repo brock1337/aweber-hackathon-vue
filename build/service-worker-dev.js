@@ -16,6 +16,8 @@ self.addEventListener('activate', () => {
   });
 });
 
+
+
 self.addEventListener('notificationclick', function(event) {
   console.log('[Service Worker] Notification click Received.', event);
   
