@@ -14,6 +14,8 @@
 </template>
 
 <script>
+  import axios from 'axios';
+  
   export default {
     name: "HomePage",
     methods: {
@@ -49,10 +51,21 @@
             console.log('[Service Worker] Notification click Received.', event);
     
             notification.close();
-    
-            // notification.waitUntil(
-            //   self.clients.openWindow('https://developers.google.com/web/')
-            // );
+            
+            axios.post(
+              'http://localhost:3000/subscriber',
+              {
+                email: 'ricanontherun@gmail.com',
+                tags: ['national_security']
+              }
+            )
+            .then(result => {
+              console.log('[API Subscribers]: ', result);
+            })
+            .catch(error => {
+              console.error('[ERROR]: ', error);
+            });
+            
           });
         }
       }
