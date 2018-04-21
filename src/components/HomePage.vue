@@ -33,25 +33,28 @@
         }
       },
       displayConfirmNotification () {
-        let options = {
-          body: `Breaking News! Now you won't miss any!`,
-          icon: '../../static/img/icons/8w-globe-color-96x96.png',
-          dir: 'ltr',
-          lang: 'en-US'
-        };
+        if ('serviceWorker' in navigator) {
+          console.log('[Service Worker]: in navigator on HomePage');
   
-        const notification = new Notification('Successfully subscribed!', options);
-        console.log(notification);
+          let options = {
+            body: `Breaking News! Now you won't miss any!`,
+            icon: '../../static/img/icons/8w-globe-color-96x96.png',
+            dir: 'ltr',
+            lang: 'en-US'
+          };
+          
+          const notification = new Notification('Successfully subscribed!', options);
   
-        notification.addEventListener('click', function(event) {
-          console.log('[Service Worker] Notification click Received.', event);
-
-          event.notification.close();
-
-          event.waitUntil(
-            self.clients.openWindow('https://developers.google.com/web/')
-          );
-        });
+          notification.addEventListener('click', function(event) {
+            console.log('[Service Worker] Notification click Received.', event);
+    
+            notification.close();
+    
+            // notification.waitUntil(
+            //   self.clients.openWindow('https://developers.google.com/web/')
+            // );
+          });
+        }
       }
     }
   }
