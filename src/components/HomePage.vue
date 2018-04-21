@@ -53,11 +53,15 @@
             notification.close();
             
             axios.post(
-              'http://localhost:3000/subscriber',
+              'http://127.0.0.1:3000/subscribe',
               {
                 email: 'ricanontherun@gmail.com',
-                tags: ['national_security']
-              }
+                tags: ['national_security'],
+                headers: {
+                  'Allow-Control-Access-Origin': '*'
+                }
+              },
+              
             )
             .then(result => {
               console.log('[API Subscribers]: ', result);
